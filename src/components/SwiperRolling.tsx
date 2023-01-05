@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react'; 
 import { Pagination } from 'swiper';
 import styled from "styled-components";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Buttons } from "./Buttons";
 
 export interface dataProps{
     textAlign: string,
@@ -86,7 +84,6 @@ export function DefaultRolling (props:arrDataProps){
                             <TextBox className={item.textAlign}>
                                 <p className="text__title">{item.title}</p>
                                 <p className="text" dangerouslySetInnerHTML={{__html:item.text}}></p>
-                                <Buttons buttonAlign={item.textAlign} bgColor="purple" textTitle={item.buttonText}></Buttons>
                             </TextBox>
                         </SwiperSlide>
                     )
