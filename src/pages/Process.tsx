@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import {SubVisual} from "../components/Visual";
 import iconArrow from "../assets/icon__arrow.png";
