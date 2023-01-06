@@ -1,14 +1,14 @@
-import React from 'react';
-import {BrowserRouter , Link, Route, Routes} from "react-router-dom";
-import { Header } from './components/Header';
-import Footer from './components/Footer';
-import { QuickMenu } from './components/QuickMenu';
-import About from './pages/About';
-import Service from './pages/Service';
-import Home from './pages/Home';
-import Process from './pages/Process';
-import { QnA } from './pages/QnA';
-import ScrollToTop from './components/ScrollToTop';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Header } from "./components/Header";
+import Footer from "./components/Footer";
+import { QuickMenu } from "./components/QuickMenu";
+import About from "./pages/About";
+import Service from "./pages/Service";
+import Home from "./pages/Home";
+import Process from "./pages/Process";
+import { QnA } from "./pages/QnA";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -18,11 +18,11 @@ function App() {
         <Header />
         <div id="cBody">
           <Routes>
-            <Route index path="/" element={<Home/>} />
-            <Route path="/about" element={<About/>} />
-            <Route path="/service" element={<Service/>} />
-            <Route path="/process" element={<Process/>} />
-            <Route path="/qna" element={<QnA/>} />
+            <Route index path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/service" element={<Service />} />
+            <Route path="/process" element={<Process />} />
+            <Route path="/qna" element={<QnA />} />
           </Routes>
         </div>
         <Footer />
