@@ -26,7 +26,6 @@ export function Loading(props:propsType) {
 			color: ${theme.colors.textMain};
 		}
 	`;
-	console.log(props)
 	return (
 		<BoxLoading>
 			<div className="box__icon"><img src={props.icon} alt="" /></div>
