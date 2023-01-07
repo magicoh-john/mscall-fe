@@ -5,6 +5,7 @@ import qnaImage from "../assets/image__qna.png";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { send } from "../common/AxiosUtil";
+import { Loading } from "../components/Loading";
 
 const BoxQna = styled.div`
   display: flex;
@@ -87,13 +88,18 @@ const SectionTitle = styled.div`
   }
 `;
 
-const BoxForm = styled.form`
-  width: calc(100% - 580px);
-  padding-bottom: 40px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+const BoxSection = styled.div`
+	display: flex;
+	width: calc(100% - 580px);
+	padding-bottom: 40px;
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+	justify-content: center;
+	align-items: center;
+`;
 
+const BoxForm = styled.form`
   .list__form {
     position: relative;
     padding: 15px 0;
@@ -228,7 +234,7 @@ const BoxAgree = styled.div`
     line-height: 20px;
     background: #fafafa;
     border: 1px solid #e5e5e5;
-    border-radius: 20px;
+    border-radius: 8px;
     overflow-y: auto;
   }
   .box__form-set {
@@ -277,15 +283,24 @@ export function QnA() {
     title: "",
     contents: ""
   });
+	const [status, setStatus] = useState({
+		state:false,
+		icon:"",
+		title:"",
+		subTitle:""
+	});
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   useEffect(() => {
-    send("get", "/api/terms/top1", "", {}, function (r) {
-      setTerm({
-        title: r.data.data[0].title,
-        contents: r.data.data[0].contents
-      });
-    });
-  }, []);
+		if(!term.title){
+			send("get", "/api/terms/top1", "", {}, function (r) {
+				setTerm({
+					title: r.data.data[0].title,
+					contents: r.data.data[0].contents
+				});
+			});
+		}
+  }, [term]);
 
   const { register, watch, handleSubmit, formState, setValue } = useForm({
     defaultValues: {
@@ -306,22 +321,35 @@ export function QnA() {
     setValue("reCaptchaToken", token);
   };
 
-  const [submitDisabled, setSubmitDisabled] = useState(false);
-
   const onValid = (data: any) => {
     if (!watch("reCaptchaToken")) {
-      alert("reCAPTCHA 인증을 확인해주세요.");
+			setStatus({
+				state: false,
+				icon: "../assets/image/icon__error.gif",
+				title: "reCAPTCHA 인증을 확인해주세요.",
+				subTitle: ""
+			});
       return false;
     }
 
     if (watch("agree") !== "yes") {
-      alert("개인정보 취급 방침 약관에 동의해 주세요.");
+			setStatus({
+				state:false,
+				icon:"../assets/image/icon__error.gif",
+				title:"개인정보 취급 방침 약관에 동의해 주세요.",
+				subTitle:""
+			})
       window.scrollTo(0, 100);
       return false;
     }
 
     if (submitDisabled) {
-      alert("처리중입니다.");
+			setStatus({
+				state:false,
+				icon:"../assets/image/icon__loading.gif",
+				title:"처리중입니다.",
+				subTitle:"잠시만 기다려주세요."
+			})
       return false;
     }
 
@@ -335,8 +363,13 @@ export function QnA() {
         const result = r.data;
         if (result.data > 0) {
           //등록 완료 페이지 전 임시 Alert
-          alert("등록되었습니다.");
-          window.location.replace("/");
+          // alert("등록되었습니다.");
+					setStatus({
+						state:true,
+						icon:"../assets/image/icon__complete.gif",
+						title:"등록 완료되었습니다.",
+						subTitle:"담당자가 확인 후 연락드릴 예정입니다."
+					});
         }
       }
     );
@@ -356,151 +389,159 @@ export function QnA() {
   ]);
 
   const workTypeList: JSX.Element[] = workType.map((data, key) => (
-    <span className="box__checkbox">
+    <span className="box__checkbox" key={key}>
       <input type="checkbox" id={`workType${key}`} value={data.code} {...register("workType", { required: "업무 종류를 선택해주세요." })} />
       <label htmlFor={`workType${key}`}>{data.name}</label>
     </span>
   ));
 
   return (
-    <BoxQna className="inner">
-      <SectionTitle>
-        <img src={qnaImage} alt="contact" />
-        <h2 className="title__h2">견적 문의</h2>
-        <p className="sub__title">
-          견적 문의사항 남겨주시면 <br />
-          담당자가 확인 후 친절하게 답변해 드리겠습니다.
-        </p>
-      </SectionTitle>
-      <BoxForm onSubmit={handleSubmit(onValid)}>
-        <BoxAgree>
-          <p className="text__title">{term.title}</p>
-          <div className="box__agree" dangerouslySetInnerHTML={{ __html: term.contents }}></div>
-          <div className="box__form-set">
-            <span className="box__radio">
-              <input type="radio" id="yes" value="yes" {...register("agree", { required: true })} />
-              <label htmlFor="yes">동의함</label>
-            </span>
-            <span className="box__radio">
-              <input type="radio" id="no" value="no" {...register("agree", { required: true })} />
-              <label htmlFor="no">동의안함</label>
-            </span>
-          </div>
-        </BoxAgree>
-        <ul className="list__form">
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title text__essential">회사명</p>
-            </div>
-            <div className="box__form-set">
-              <span className="box__input">
-                <input type="text" placeholder="회사명을 입력해주세요" maxLength={50} {...register("company", { required: "회사명을 입력하지 않았습니다. 입력해주세요." })} />
-              </span>
-              <p className="text__error">
-                {formState.errors?.company?.message}
-              </p>
-            </div>
-          </li>
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title text__essential">업종</p>
-            </div>
-            <div className="box__form-set">
-              <span className="box__input">
-                <input type="text" placeholder="업종을 입력해주세요" maxLength={50} {...register("industry", { required: "업종을 입력하지 않았습니다. 입력해주세요." })} />
-              </span>
-              <p className="text__error">
-                {formState.errors?.industry?.message}
-              </p>
-            </div>
-          </li>
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title text__essential">성명</p>
-            </div>
-            <div className="box__form-set">
-              <span className="box__input">
-                <input type="text" placeholder="성명을 입력해주세요" maxLength={50} {...register("name", { required: "성명을 입력하지 않았습니다. 입력해주세요.", pattern: { value: /^[가-힣]{2,5}|[a-zA-Z]{2,10}$/, message: "한글, 영문만 입력 가능합니다." }})} />
-              </span>
-              <p className="text__error">{formState.errors?.name?.message}</p>
-            </div>
-          </li>
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title text__essential">연락처</p>
-            </div>
-            <div className="box__form-set">
-              <span className="box__input">
-                <input type="text" placeholder="-제외한 숫자로만 입력해주세요" maxLength={20} {...register("tel", { required: "연락처를 입력하지 않았습니다.", pattern: { value: /^[0-9]{10}/, message: "10자리 숫자로만 입력 가능합니다." }})} />
-              </span>
-              <p className="text__error">{formState.errors?.tel?.message}</p>
-            </div>
-          </li>
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title text__essential">이메일</p>
-            </div>
-            <div className="box__form-set box__email">
-              <span className="box__input">
-                <input type="text" placeholder="abc@email.com" maxLength={75} {...register("email", { required: "이메일을 입력하지 않았습니다.", pattern: { value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g, message: "@포함한 이메일만 가능합니다."}})} />
-              </span>
-              <p className="text__error">{formState.errors?.email?.message}</p>
-            </div>
-          </li>
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title text__essential">업무 종류</p>
-            </div>
-            <div className="box__form-set">
-              {workTypeList}
-              <p className="text__error">
-                {formState.errors?.workType?.message}
-              </p>
-            </div>
-            <p className="text__noti">- 중복 선택 가능</p>
-          </li>
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title text__essential">업무량</p>
-            </div>
-            <div className="box__form-set">
-              <span className="box__input">
-                <input type="text" placeholder="ex) 전화 60 / 게시판 30 / 톡상담 20 / 기타 10" maxLength={100} {...register("workLoad", { required: "업무량을 입력해주세요." })} />
-              </span>
-              <p className="text__error">
-                {formState.errors?.workLoad?.message}
-              </p>
-            </div>
-            <p className="text__noti">
-              - 일일 기준 응대콜 처리량, 게시판 처리량, 톡상담 처리량, 기타 처리량를 입력해주세요.
-            </p>
-          </li>
-          <li className="list-item">
-            <div className="box__title">
-              <p className="text__title">문의사항</p>
-            </div>
-            <div className="box__form-set">
-              <span className="box__textarea">
-                <textarea maxLength={21844} {...register("contents")} />
-              </span>
-            </div>
-          </li>
-          <li className="list-item">
-            <ReCAPTCHA
-              onChange={token => {
-                onChangeRecaptcha(token || "");
-              }}
-              sitekey={
-                process.env.REACT_APP_GOOGLE_RECAPTCHA_SITE_KEY as string
-              }
-            />
-            <input type="hidden" {...register("reCaptchaToken")} />
-          </li>
-        </ul>
-        <div className="box__buttons">
-          <button type="submit" className="button__submit">작성완료</button>
-        </div>
-      </BoxForm>
-    </BoxQna>
+		<>
+			<BoxQna className="inner">
+				<SectionTitle>
+					<img src={qnaImage} alt="contact" />
+					<h2 className="title__h2">견적 문의</h2>
+					<p className="sub__title">
+						견적 문의사항 남겨주시면 <br />
+						담당자가 확인 후 친절하게 답변해 드리겠습니다.
+					</p>
+				</SectionTitle>
+				<BoxSection>
+					{!status.state?
+						<BoxForm onSubmit={handleSubmit(onValid)}>
+							<BoxAgree>
+								<p className="text__title">{term.title}</p>
+								<div className="box__agree" dangerouslySetInnerHTML={{ __html: term.contents }}></div>
+								<div className="box__form-set">
+									<span className="box__radio">
+										<input type="radio" id="yes" value="yes" {...register("agree", { required: true })} />
+										<label htmlFor="yes">동의함</label>
+									</span>
+									<span className="box__radio">
+										<input type="radio" id="no" value="no" {...register("agree", { required: true })} />
+										<label htmlFor="no">동의안함</label>
+									</span>
+								</div>
+							</BoxAgree>
+							<ul className="list__form">
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title text__essential">회사명</p>
+									</div>
+									<div className="box__form-set">
+										<span className="box__input">
+											<input type="text" placeholder="회사명을 입력해주세요" maxLength={50} {...register("company", { required: "회사명을 입력하지 않았습니다. 입력해주세요." })} />
+										</span>
+										<p className="text__error">
+											{formState.errors?.company?.message}
+										</p>
+									</div>
+								</li>
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title text__essential">업종</p>
+									</div>
+									<div className="box__form-set">
+										<span className="box__input">
+											<input type="text" placeholder="업종을 입력해주세요" maxLength={50} {...register("industry", { required: "업종을 입력하지 않았습니다. 입력해주세요." })} />
+										</span>
+										<p className="text__error">
+											{formState.errors?.industry?.message}
+										</p>
+									</div>
+								</li>
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title text__essential">성명</p>
+									</div>
+									<div className="box__form-set">
+										<span className="box__input">
+											<input type="text" placeholder="성명을 입력해주세요" maxLength={50} {...register("name", { required: "성명을 입력하지 않았습니다. 입력해주세요.", pattern: { value: /^[가-힣]{2,5}|[a-zA-Z]{2,10}$/, message: "한글, 영문만 입력 가능합니다." }})} />
+										</span>
+										<p className="text__error">{formState.errors?.name?.message}</p>
+									</div>
+								</li>
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title text__essential">연락처</p>
+									</div>
+									<div className="box__form-set">
+										<span className="box__input">
+											<input type="text" placeholder="-제외한 숫자로만 입력해주세요" maxLength={20} {...register("tel", { required: "연락처를 입력하지 않았습니다.", pattern: { value: /^[0-9]{10}/, message: "10자리 숫자로만 입력 가능합니다." }})} />
+										</span>
+										<p className="text__error">{formState.errors?.tel?.message}</p>
+									</div>
+								</li>
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title text__essential">이메일</p>
+									</div>
+									<div className="box__form-set box__email">
+										<span className="box__input">
+											<input type="text" placeholder="abc@email.com" maxLength={75} {...register("email", { required: "이메일을 입력하지 않았습니다.", pattern: { value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g, message: "@포함한 이메일만 가능합니다."}})} />
+										</span>
+										<p className="text__error">{formState.errors?.email?.message}</p>
+									</div>
+								</li>
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title text__essential">업무 종류</p>
+									</div>
+									<div className="box__form-set">
+										{workTypeList}
+										<p className="text__error">
+											{formState.errors?.workType?.message}
+										</p>
+									</div>
+									<p className="text__noti">- 중복 선택 가능</p>
+								</li>
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title text__essential">업무량</p>
+									</div>
+									<div className="box__form-set">
+										<span className="box__input">
+											<input type="text" placeholder="ex) 전화 60 / 게시판 30 / 톡상담 20 / 기타 10" maxLength={100} {...register("workLoad", { required: "업무량을 입력해주세요." })} />
+										</span>
+										<p className="text__error">
+											{formState.errors?.workLoad?.message}
+										</p>
+									</div>
+									<p className="text__noti">
+										- 일일 기준 응대콜 처리량, 게시판 처리량, 톡상담 처리량, 기타 처리량를 입력해주세요.
+									</p>
+								</li>
+								<li className="list-item">
+									<div className="box__title">
+										<p className="text__title">문의사항</p>
+									</div>
+									<div className="box__form-set">
+										<span className="box__textarea">
+											<textarea maxLength={21844} {...register("contents")} />
+										</span>
+									</div>
+								</li>
+								<li className="list-item">
+									<ReCAPTCHA
+										onChange={token => {
+											onChangeRecaptcha(token || "");
+										}}
+										sitekey={
+											process.env.REACT_APP_GOOGLE_RECAPTCHA_SITE_KEY as string
+										}
+									/>
+									<input type="hidden" {...register("reCaptchaToken")} />
+								</li>
+							</ul>
+							<div className="box__buttons">
+								<button type="submit" className="button__submit">작성완료</button>
+							</div>
+						</BoxForm>
+					:
+						<Loading icon={status.icon} title={status.title} subTitle={status.subTitle} />
+					}
+				</BoxSection>
+			</BoxQna>
+		</>
   );
 }
