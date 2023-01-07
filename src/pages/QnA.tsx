@@ -6,6 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { send } from "../common/AxiosUtil";
 import { Loading } from "../components/Loading";
+import { LayerPop } from "../components/LayerPop";
 
 const BoxQna = styled.div`
   display: flex;
@@ -284,12 +285,27 @@ export function QnA() {
     contents: ""
   });
 	const [status, setStatus] = useState({
-		state:false,
-		icon:"",
-		title:"",
-		subTitle:""
+		state: false,
+		icon: "",
+		title: "",
+		subTitle: ""
+	});
+	const [isOpen, setIsOpen] = useState(false);
+	const [layerStatus, setLayerStatus] = useState({
+		type: "",
+		headTitle: "",
+		contents:{
+			contents: "",
+			stateIcon: "",
+			stateTitle: "",
+			stateSubTitle: ""
+		}
 	});
   const [submitDisabled, setSubmitDisabled] = useState(false);
+
+	const closeLayer = () =>{
+		setIsOpen(false);
+	};
 
   useEffect(() => {
 		if(!term.title){
@@ -300,7 +316,20 @@ export function QnA() {
 				});
 			});
 		}
-  }, [term]);
+
+		if(isOpen){
+			setLayerStatus({
+				type: "alert",
+				headTitle: "",
+				contents: {
+					contents: "",
+					stateIcon: status.icon,
+					stateTitle: status.title,
+					stateSubTitle: status.subTitle
+				}
+			})
+		}
+  }, [term, status, isOpen]);
 
   const { register, watch, handleSubmit, formState, setValue } = useForm({
     defaultValues: {
@@ -323,6 +352,7 @@ export function QnA() {
 
   const onValid = (data: any) => {
     if (!watch("reCaptchaToken")) {
+			setIsOpen(true);
 			setStatus({
 				state: false,
 				icon: "../assets/image/icon__error.gif",
@@ -333,22 +363,23 @@ export function QnA() {
     }
 
     if (watch("agree") !== "yes") {
+			setIsOpen(true);
 			setStatus({
-				state:false,
-				icon:"../assets/image/icon__error.gif",
-				title:"개인정보 취급 방침 약관에 동의해 주세요.",
-				subTitle:""
+				state: false,
+				icon: "../assets/image/icon__error.gif",
+				title: "개인정보 취급 방침 약관에 동의해 주세요.",
+				subTitle: ""
 			})
-      window.scrollTo(0, 100);
       return false;
     }
 
     if (submitDisabled) {
+			setIsOpen(true);
 			setStatus({
-				state:false,
-				icon:"../assets/image/icon__loading.gif",
-				title:"처리중입니다.",
-				subTitle:"잠시만 기다려주세요."
+				state: false,
+				icon: "../assets/image/icon__loading.gif",
+				title: "처리중입니다.",
+				subTitle: "잠시만 기다려주세요."
 			})
       return false;
     }
@@ -362,8 +393,6 @@ export function QnA() {
       function (r) {
         const result = r.data;
         if (result.data > 0) {
-          //등록 완료 페이지 전 임시 Alert
-          // alert("등록되었습니다.");
 					setStatus({
 						state:true,
 						icon:"../assets/image/icon__complete.gif",
@@ -542,6 +571,8 @@ export function QnA() {
 					}
 				</BoxSection>
 			</BoxQna>
+			
+			<LayerPop open={isOpen} type={layerStatus.type} headTitle={layerStatus.headTitle} contents={layerStatus.contents} closeLayer={closeLayer}></LayerPop>
 		</>
   );
 }
