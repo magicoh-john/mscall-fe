@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import checkIcon from "../assets/icon__checkbox.png";
-import qnaImage from "../assets/image__qna.png";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { send } from "../common/AxiosUtil";
 import { Loading } from "../components/Loading";
 import { LayerPop } from "../components/LayerPop";
+import checkIcon from "../assets/icon__checkbox.png";
+import qnaImage from "../assets/image__qna.png";
 
 const BoxQna = styled.div`
   display: flex;
