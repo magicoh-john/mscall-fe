@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Process from "./pages/Process";
 import { QnA } from "./pages/QnA";
 import ScrollToTop from "./components/ScrollToTop";
+import { Privacy } from "./pages/Privacy";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/service" element={<Service />} />
             <Route path="/process" element={<Process />} />
             <Route path="/qna" element={<QnA />} />
+            <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </div>
         <Footer />
