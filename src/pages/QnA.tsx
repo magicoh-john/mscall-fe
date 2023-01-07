@@ -8,6 +8,7 @@ import { send } from "../common/AxiosUtil";
 import { Loading } from "../components/Loading";
 import { LayerPop } from "../components/LayerPop";
 
+
 const BoxQna = styled.div`
   display: flex;
   flex-wrap: nowrap;
