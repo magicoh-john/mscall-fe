@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../styles/Theme";
 
 export interface listDataType {
   img: string;
@@ -15,27 +16,40 @@ export function FlexList(props: arrDataProps) {
   const FlexList = styled.ul`
     display: block;
   `;
-
   const ListItem = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    &:not(last-child) {
+    & > div:last-child {
+      padding-left: 40px;
+    }
+    &:not(:last-child) {
       margin-bottom: 30px;
     }
-
     &:nth-child(odd) {
       flex-direction: row-reverse;
+      & > div:last-child {
+        padding-left: 0;
+        padding-right: 40px;
+      }
+    }
+    @media ${theme.device.mobile}{
+      display: block;
     }
   `;
 
   const ImgBox = styled.div`
     width: 560px;
+    max-width: 50%;
     border: 1px solid #e5e5e5;
     border-radius: 20px;
     overflow: hidden;
-
+    @media ${theme.device.mobile}{
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
     & > img {
       width: 100%;
       height: 100%;
@@ -45,6 +59,7 @@ export function FlexList(props: arrDataProps) {
 
   const TextBox = styled.div`
     width: 490px;
+    max-width: 100%;
     font-size: 18px;
     word-break: keep-all;
     .text__title {
@@ -52,6 +67,14 @@ export function FlexList(props: arrDataProps) {
       font-size: 30px;
       font-weight: bold;
       color: #222;
+    }
+    @media ${theme.device.mobile}{
+      font-size: 14px;
+      .text__title {
+        margin-bottom: 5px;
+        font-size: 20px;
+        line-height: 1.2;
+      }
     }
   `;
 
