@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FlexList, listDataType } from "../components/List";
 import { MainVisual } from "../components/Visual";
-import chartImg1 from "../assets/image__main-chart1.png";
+import chartImg1 from "../assets/image__main-chart.png";
+import { theme } from "../styles/Theme";
 
 const dummyData: Array<listDataType> = [
   {
@@ -70,11 +71,14 @@ const iconData: Array<iconType> = [
 ];
 
 function Home() {
+  const [ load, setLoad ] = useState(false);
   useEffect(() => {
-    setTimeout(() => {
-      document.getElementById("mainVis")?.classList.add("active");
-    }, 500);
-
+    setLoad(true);
+    if(load){
+      setTimeout(() => {
+        document.getElementById("mainVis")?.classList.add("active");
+      }, 300);
+    }
     window.addEventListener("scroll", function (e) {
       const boxes = document.getElementsByClassName(
         "scrollMotion"
@@ -89,51 +93,60 @@ function Home() {
         }
       }
     });
-  });
+  },[load]);
 
   const BoxSection = styled.div`
-    padding-top: 140px;
-
-    &.box__main-vis {
-      height: 580px;
-      padding-top: 0;
-      margin-bottom: 80px;
-    }
-
+    padding-top: 120px;
+    @media ${theme.device.mobile} {
+      padding-top: 60px;
+    } 
     .box__chart {
       position: relative;
       width: 800px;
+      max-width:100%;
       margin: 0 auto;
       img {
         width: 100%;
         transition: all linear 0.4s;
         transition-delay: 0.8s;
       }
-
       &.active {
         .image__chart {
           opacity: 0.5;
         }
       }
     }
-
     .list__work-icon {
       display: flex;
       width: 950px;
+      max-width:100%;
       margin: 0 auto;
       flex-wrap: wrap;
       .list-item {
         width: calc(100% / 3);
+        padding: 0 20px;
         text-align: center;
         &:not(:nth-child(-n + 3)) {
           padding-top: 40px;
         }
-
+        img{
+          max-width:100%;
+        }
         .text {
           margin-top: 20px;
           font-size: 20px;
           font-weight: bold;
           color: #222;
+        }
+
+        @media ${theme.device.mobile} {
+          &:not(:nth-child(-n + 3)) {
+            padding-top: 20px;
+          }
+          .text {
+            margin-top: 10px;
+            font-size: 14px;
+          }
         }
       }
     }
@@ -147,6 +160,17 @@ function Home() {
     strong {
       font-weight: bold;
     }
+    br {
+      display: none;
+    }
+    @media ${theme.device.mobile}{
+      margin-bottom: 30px;
+      font-size: 25px;
+      line-height: 1.2;
+      br {
+        display: block;
+      }
+    }
   `;
 
   return (
@@ -159,7 +183,7 @@ function Home() {
       />
       <BoxSection className="inner">
         <Title className="scrollMotion">
-          <strong>MS COMPANY</strong>는 이런 업무를 합니다.
+          <strong>MS COMPANY</strong>는<br/> 이런 업무를 합니다.
         </Title>
         <ul className="list__work-icon">
           {iconData.map((item, idx) => {
@@ -174,13 +198,13 @@ function Home() {
       </BoxSection>
       <BoxSection className="inner">
         <Title className="scrollMotion">
-          <strong>MS COMPANY</strong>와 함께라면 ?
+          <strong>MS COMPANY</strong>와<br/> 함께라면 ?
         </Title>
         <FlexList data={dummyData} class="scrollMotion"></FlexList>
       </BoxSection>
       <BoxSection>
         <Title className="scrollMotion">
-          <strong>MS COMPANY</strong>가 비용절감에 도움을 드리겠습니다.
+          <strong>MS COMPANY</strong>가<br/> 비용절감에 도움을 드리겠습니다.
         </Title>
         <div className="box__chart scrollMotion">
           <img src={chartImg1} alt="" />

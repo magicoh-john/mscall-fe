@@ -32,7 +32,7 @@ const serviceData: Array<serviceType> = [
 const stepData: Array<stepType> = [
   {
     icon: "../assets/image/icon__step1.png",
-    title: "스타트 업 기초 컨설팅",
+    title: "스타트업 기초 컨설팅",
     text: "스타트 업 회사의 경우 업체와 조율 하에 기초 컨설팅 지원 FAQ 작성, 고객상담 시간조정 업종 별 어드민 추천."
   },
   {

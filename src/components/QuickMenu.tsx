@@ -6,7 +6,7 @@ export function QuickMenu() {
   const BoxQuick = styled.div`
     position: fixed;
     bottom: 50px;
-    left: calc(50% + 660px);
+    left: calc(50% + 600px);
     z-index: 10;
     .button__quick {
       display: block;
@@ -30,7 +30,7 @@ export function QuickMenu() {
         .box__tooptip {
           position: absolute;
           top: -70px;
-          left: -20px;
+          right: -20px;
           padding: 10px 15px;
           font-size: 20px;
           font-weight: bold;
@@ -44,7 +44,7 @@ export function QuickMenu() {
             content: "";
             position: absolute;
             bottom: -3px;
-            left: 35px;
+            right: 50px;
             display: block;
             width: 10px;
             height: 10px;
@@ -56,7 +56,7 @@ export function QuickMenu() {
             content: "";
             position: absolute;
             bottom: -6px;
-            left: 35px;
+            right: 50px;
             display: block;
             width: 10px;
             height: 10px;

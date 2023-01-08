@@ -2,7 +2,7 @@ import { DefaultTheme } from "styled-components";
 
 const deviceSize = {
   mobile: "768px",
-  desktop: "1200px"
+  desktop: "1100px"
 };
 
 export const theme: DefaultTheme = {
