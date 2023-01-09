@@ -103,6 +103,10 @@ export const HeaderStyle = css`
       font-size: 18px;
       font-weight: 500;
       color: #989898;
+      &.active {
+        font-weight:bold;
+        color: #000;
+      }
     }
   }
 

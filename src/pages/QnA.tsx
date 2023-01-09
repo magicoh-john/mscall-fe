@@ -95,13 +95,18 @@ const SectionTitle = styled.div`
 `;
 
 const BoxSection = styled.div`
+  display: flex;
   width: 55%;
 	padding-bottom: 40px;
 	background: #fff;
 	border-radius: 20px;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
   @media ${theme.device.mobile}{
     width: 100%;
+    min-height: 250px;
 	  padding-bottom: 20px;
     border-radius: 8px;
   }

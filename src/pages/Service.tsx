@@ -224,7 +224,7 @@ export default function Service() {
           <BoxDiagram>
             {serviceData.map((item, idx) => {
               return (
-                <li className="list-item">
+                <li className="list-item" key={idx}>
                   <div className="box__text">
                     <p className="text__title">{item.title}</p>
                     <p className="text">{item.text}</p>
@@ -239,7 +239,7 @@ export default function Service() {
           <BoxStep>
             {stepData.map((item, idx) => {
               return (
-                <li className="list-item">
+                <li className="list-item" key={idx}>
                   <p className="box__icon">
                     <img src={item.icon} alt="" />
                   </p>

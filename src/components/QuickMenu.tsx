@@ -123,7 +123,7 @@ export function QuickMenu() {
     <BoxQuick>
       <button type="button" className="button__quick button__call">
         <span className="for-a11y">상담<br/>전화</span>
-        <div className="box__tooptip">1688-1234</div>
+        <div className="box__tooptip">1660-3695</div>
       </button>
       <button type="button" onClick={openLayer} className="button__quick button__kakao">
         <span className="for-a11y">톡상담</span>

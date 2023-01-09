@@ -34,6 +34,10 @@ export function LayerPop(props:propsType){
 				min-height: 350px;
 				justify-content: center;
 				align-items: center;
+				@media ${theme.device.mobile}{	
+					width: calc(100% - 16px);
+					min-height: 200px;
+				}
 			}
 		}
 		.box__container {
@@ -43,6 +47,9 @@ export function LayerPop(props:propsType){
 			background: #fff;
 			border-radius: 20px;
 			transform: translate(-50%, -50%);
+			@media ${theme.device.mobile}{	
+				border-radius: 8px;
+			}
 		}
 		.text__head {
 			padding: 15px;
@@ -51,11 +58,18 @@ export function LayerPop(props:propsType){
 			color: ${theme.colors.textMain};
 			text-align: center;
 			border-bottom: 1px solid #e5e5e5;
+			@media ${theme.device.mobile}{	
+				padding: 10px; 
+				font-size: 18px;
+			}
 		}
 		.box__content{
 			padding: 20px;
 			.title{
 				font-size: 20px;
+				@media ${theme.device.mobile}{	
+					font-size: 16px;
+				}
 			}
 		}
 		.button__close {
@@ -65,6 +79,11 @@ export function LayerPop(props:propsType){
 			width: 60px;
 			height: 60px;
 			background: url(${iconClose}) no-repeat center / 40px;
+			@media ${theme.device.mobile}{	
+				width: 30px;
+				height: 30px;
+				background-size: 20px; 
+			}
 		}
 	`;
 

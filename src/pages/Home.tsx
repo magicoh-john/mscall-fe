@@ -188,7 +188,7 @@ function Home() {
         <ul className="list__work-icon">
           {iconData.map((item, idx) => {
             return (
-              <li className="list-item scrollMotion">
+              <li className="list-item scrollMotion" key={idx}>
                 <img src={item.img} alt="" />
                 <p className="text">{item.text}</p>
               </li>
