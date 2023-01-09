@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { SubVisual } from "../components/Visual";
 import diagramImg from "../assets/image__diagram.png";
 import iconArrow from "../assets/icon__arrow.png";
+import { theme } from "../styles/Theme";
 
 interface serviceType {
   title: string;
@@ -67,26 +68,38 @@ export default function Service() {
         background: #222;
       }
     }
+    @media ${theme.device.mobile}{
+      &:not(:first-child){
+        margin-top:50px;
+      }
+      h3.text__title {
+        margin-bottom: 15px;
+        font-size: 20px;
+        &:before {
+          width: 20px;
+          margin-bottom: 5px;
+        }
+      }
+    }
   `;
   const BoxDiagram = styled.ul`
     position: relative;
     padding-bottom: 100px;
-
     &:before {
       content: "";
       display: block;
-      width: 400px;
-      height: 400px;
+      max-width: 400px;
+      max-height: 400px;
+      width: calc(100vw - 32px);
+      height: calc(100vw - 32px);
       margin: 0 auto;
       background: url(${diagramImg}) no-repeat center / 100%;
     }
-
     .list-item {
       position: absolute;
       top: 70px;
       left: 0;
-      width: 350px;
-
+      width: calc(50% - 220px);
       &:nth-child(2) {
         left: auto;
         right: 0;
@@ -94,7 +107,6 @@ export default function Service() {
           color: #860e68;
         }
       }
-
       &:nth-child(3) {
         top: auto;
         bottom: 0;
@@ -106,7 +118,6 @@ export default function Service() {
           color: #ff8e01;
         }
       }
-
       .text__title {
         margin-bottom: 10px;
         font-size: 25px;
@@ -114,15 +125,34 @@ export default function Service() {
         color: #1a258f;
       }
     }
+    @media ${theme.device.mobile}{
+      padding-bottom: 0;
+      .list-item{
+        position: initial;
+        top: 0;
+        width: 100%;
+        font-size: 14px; 
+        &:nth-child(3) {
+          left: 0;
+          width: 100%;
+          text-align: left;
+        }
+        &:not(:first-child){
+          margin-top: 20px;
+        }
+        .text__title {
+          font-size: 18px;
+          line-height: 1;
+        }
+      }
+    }
   `;
   const BoxStep = styled.ul`
     display: flex;
     flex-wrap: nowrap;
-
     .list-item {
       position: relative;
       flex: 1;
-
       &:not(:last-child) {
         padding-right: 120px;
         &:after {
@@ -138,23 +168,47 @@ export default function Service() {
         }
       }
     }
-
     .box__icon {
       img {
         width: 100%;
       }
     }
-
     .text__step {
       margin-right: 5px;
       font-size: 30px;
       font-weight: bold;
     }
-
     .text__title {
       margin-bottom: 10px;
       font-size: 20px;
       color: #222;
+    }
+    @media ${theme.device.mobile}{
+      display: block;
+      font-size: 14px;
+      .list-item:not(:last-child) {
+        padding-right: 0;
+        &:after {
+          position: initial;
+          top: 0;
+          right: 0;
+          width: 40px;
+          height: 40px;
+          margin: 20px auto;
+          transform: rotate(90deg);
+        }
+      }
+      .box__icon {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      .text__step {
+        font-size: 20px;
+      }
+      .text__title {
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
     }
   `;
   return (
@@ -170,7 +224,7 @@ export default function Service() {
           <BoxDiagram>
             {serviceData.map((item, idx) => {
               return (
-                <li className="list-item">
+                <li className="list-item" key={idx}>
                   <div className="box__text">
                     <p className="text__title">{item.title}</p>
                     <p className="text">{item.text}</p>
@@ -185,7 +239,7 @@ export default function Service() {
           <BoxStep>
             {stepData.map((item, idx) => {
               return (
-                <li className="list-item">
+                <li className="list-item" key={idx}>
                   <p className="box__icon">
                     <img src={item.icon} alt="" />
                   </p>

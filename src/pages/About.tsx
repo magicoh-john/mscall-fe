@@ -33,6 +33,7 @@ function About() {
         margin-bottom: 40px;
       }
       @media ${theme.device.mobile}{
+        float: none;
         width: 450px;
         max-width: 100%;
         height: auto;

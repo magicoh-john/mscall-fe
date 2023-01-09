@@ -7,12 +7,16 @@ import { useForm } from "react-hook-form";
 import { send } from "../common/AxiosUtil";
 import { Loading } from "../components/Loading";
 import { LayerPop } from "../components/LayerPop";
+import { theme } from "../styles/Theme";
 
 const BoxQna = styled.div`
   display: flex;
   flex-wrap: nowrap;
   padding-top: 60px;
-
+  @media ${theme.device.mobile}{
+    display: block;
+    padding-top:30px;
+  }
   &:before {
     content: "";
     position: fixed;
@@ -55,18 +59,16 @@ const BoxQna = styled.div`
 
 const SectionTitle = styled.div`
   position: relative;
-  width: 540px;
-  margin-right: 40px;
-  padding-top: 180px;
-  overflow: hidden;
+  width: 45%;
+  margin-right: 40px;  
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
   img {
     width: 100%;
-    margin-left: -10px;
+    margin: 40px 0 0 -10px;
   }
   .title__h2 {
-    position: absolute;
-    top: 0;
-    left: 0;
     font-size: 40px;
     font-weight: 900;
     color: #fff;
@@ -79,43 +81,52 @@ const SectionTitle = styled.div`
       background: #fff;
     }
   }
-  .sub__title {
-    position: absolute;
-    top: 90px;
-    left: 0;
-    font-size: 18px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.8);
+  @media ${theme.device.mobile}{
+    width: 100%;
+    margin: 0 0 20px;
+    font-size: 14px;
+    .title__h2 {
+      font-size: 25px;
+    }
+    img {
+      display: none;
+    }
   }
 `;
 
 const BoxSection = styled.div`
-	display: flex;
-	width: calc(100% - 580px);
+  display: flex;
+  width: 55%;
 	padding-bottom: 40px;
 	background: #fff;
 	border-radius: 20px;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-	justify-content: center;
-	align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  @media ${theme.device.mobile}{
+    width: 100%;
+    min-height: 250px;
+	  padding-bottom: 20px;
+    border-radius: 8px;
+  }
 `;
 
 const BoxForm = styled.form`
   .list__form {
-    position: relative;
     padding: 15px 0;
     &:before {
       content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
       display: block;
       width: calc(100% - 40px);
+      margin: 0 auto;
       border-top: 1px solid #e5e5e5;
-      transform: translateX(-50%);
     }
     .list-item {
       padding: 10px 30px;
+      @media ${theme.device.mobile}{
+        padding: 10px 15px;
+      }
       .box__title {
         width: 150px;
         margin-bottom: 15px;
@@ -130,11 +141,6 @@ const BoxForm = styled.form`
           }
         }
       }
-
-      .text__unit {
-        display: inline-block;
-        font-weight: normal;
-      }
       .box__form-set {
         .box__input {
           display: block;
@@ -143,7 +149,6 @@ const BoxForm = styled.form`
           border: 1px solid #e5e5e5;
           border-radius: 8px;
           overflow: hidden;
-
           input {
             width: 100%;
             height: 100%;
@@ -208,6 +213,9 @@ const BoxForm = styled.form`
 
 const BoxAgree = styled.div`
   padding: 30px 20px;
+  @media ${theme.device.mobile}{
+    padding: 15px 15px 0;
+  }
   .text__title {
     margin-bottom: 15px;
     font-size: 20px;
@@ -428,12 +436,12 @@ export function QnA() {
 		<>
 			<BoxQna className="inner">
 				<SectionTitle>
-					<img src={qnaImage} alt="contact" />
 					<h2 className="title__h2">견적 문의</h2>
 					<p className="sub__title">
 						견적 문의사항 남겨주시면 <br />
 						담당자가 확인 후 친절하게 답변해 드리겠습니다.
 					</p>
+					<img src={qnaImage} alt="" />
 				</SectionTitle>
 				<BoxSection>
 					{!status.state?

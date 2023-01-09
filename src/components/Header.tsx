@@ -1,3 +1,4 @@
+import { off } from "process";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
@@ -20,6 +21,13 @@ export function Header() {
       document.querySelector("body")?.classList.remove("js-scroll-lock");
     }
   };
+  const menuCloseEvent = () =>{
+    if(window.innerWidth < 768){
+      document.querySelector("body")?.classList.remove("js-scroll-lock");
+      document.querySelector(".gnb")?.classList.remove("active");
+      document.querySelector(".button__menu")?.classList.remove("active");
+    }
+  }
   return (
     <BoxHeader id="header">
       <div className="inner">
@@ -30,10 +38,10 @@ export function Header() {
           <span className="for-a11y">메뉴 열기</span>
         </button>
         <nav className="gnb">
-          <NavLink to="/about" style={({ isActive }) => (isActive ? active : {})}>회사소개</NavLink>
-          <NavLink to="/service" style={({ isActive }) => (isActive ? active : {})}>제공서비스</NavLink>
-          <NavLink to="/process" style={({ isActive }) => (isActive ? active : {})}>계약프로세스</NavLink>
-          <NavLink to="/qna" style={({ isActive }) => (isActive ? active : {})}>견적문의</NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? "active" : ""} onClick={menuCloseEvent}>회사소개</NavLink>
+          <NavLink to="/service" className={({ isActive }) => isActive ? "active" : ""} onClick={menuCloseEvent}>제공서비스</NavLink>
+          <NavLink to="/process" className={({ isActive }) => isActive ? "active" : ""} onClick={menuCloseEvent}>계약프로세스</NavLink>
+          <NavLink to="/qna" className={({ isActive }) => isActive ? "active" : ""} onClick={menuCloseEvent}>견적문의</NavLink>
         </nav>
       </div>
     </BoxHeader>

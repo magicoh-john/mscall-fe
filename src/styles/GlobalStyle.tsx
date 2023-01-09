@@ -12,14 +12,14 @@ export const GlobalStyle = createGlobalStyle`
       font-weight: 300;
     }
     a {
-      color: ${props => props.theme.colors.textDefault};
+      color: ${theme.colors.textDefault};
       text-decoration: none;
     }
     body {
       font-family: 'Roboto','Noto Sans KR', sans-serif;
       font-weight: 300;
       line-height: 1.5;
-      color: ${props => props.theme.colors.textDefault};
+      color: ${theme.colors.textDefault};
       box-sizing: border-box;
       &.js-scroll-lock{
         height: 100%;
@@ -28,10 +28,10 @@ export const GlobalStyle = createGlobalStyle`
     }
     .text--point {
       &-B{
-        color: ${props => props.theme.colors.pointB};
+        color: ${theme.colors.pointB};
       }
       &-G{    
-        color: ${props => props.theme.colors.pointG};
+        color: ${theme.colors.pointG};
       }
     }
     .for-a11y{
@@ -41,17 +41,19 @@ export const GlobalStyle = createGlobalStyle`
     .inner {
       width: 1170px;
       margin: 0 auto;
-
-      @media ${props => props.theme.device.tablet}{
+      @media ${theme.device.desktop}{
+        width: calc(100% - 220px);
+      }
+      @media ${theme.device.tablet}{
         width: 94%;
       }
-      @media ${props => props.theme.device.mobile}{
+      @media ${theme.device.mobile}{
         width: calc(100% - 32px);
       }
     }
     #cBody {
       padding-bottom: 120px;
-      @media ${props => props.theme.device.mobile}{
+      @media ${theme.device.mobile}{
         padding-bottom: 60px;
       }
     }
@@ -65,7 +67,7 @@ export const GlobalStyle = createGlobalStyle`
         opacity: 1;
         transform: scale(1);
       }
-      @media ${props => props.theme.device.mobile}{
+      @media ${theme.device.mobile}{
         top: 60px;
       }
     }
@@ -101,6 +103,10 @@ export const HeaderStyle = css`
       font-size: 18px;
       font-weight: 500;
       color: #989898;
+      &.active {
+        font-weight:bold;
+        color: #000;
+      }
     }
   }
 
@@ -141,8 +147,8 @@ export const HeaderStyle = css`
         border-radius: 3px;
         background: linear-gradient(
           45deg,
-          ${props => props.theme.colors.pointB} 30%,
-          ${props => props.theme.colors.pointG} 80%
+          ${theme.colors.pointB} 30%,
+          ${theme.colors.pointG} 80%
         );
         transition: all ease 0.4s;
       }

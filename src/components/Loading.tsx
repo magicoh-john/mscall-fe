@@ -13,6 +13,9 @@ export function Loading(props:propsType) {
 		.box__icon {
 			width: 120px;
 			margin: 0 auto;
+			@media ${theme.device.mobile}{	
+				width: 80px;
+			}
 			img {
 				width: 100%
 			}
@@ -24,6 +27,14 @@ export function Loading(props:propsType) {
 			font-size: 30px;
 			font-weight: bold;
 			color: ${theme.colors.textMain};
+		}
+		@media ${theme.device.mobile}{	
+			.box__icon{
+				width:80px;
+			}
+			.title{
+				font-size: 16px;
+			}
 		}
 	`;
 	return (
