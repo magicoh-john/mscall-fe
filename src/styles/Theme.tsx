@@ -2,7 +2,8 @@ import { DefaultTheme } from "styled-components";
 
 const deviceSize = {
   mobile: "768px",
-  desktop: "1100px"
+  tablet: "1100px",
+  desktop: "1450px"
 };
 
 export const theme: DefaultTheme = {
@@ -14,7 +15,7 @@ export const theme: DefaultTheme = {
   },
   device: {
     mobile: `(max-width:${deviceSize.mobile})`,
-    tablet: `(min-width:${deviceSize.mobile}) and (max-width:${deviceSize.desktop})`,
-    desktop: `(min-width:${deviceSize.desktop})`
+    tablet: `(min-width:${deviceSize.mobile}) and (max-width:${deviceSize.tablet})`,
+    desktop: `(max-width:${deviceSize.desktop})`
   }
 };

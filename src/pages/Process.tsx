@@ -83,6 +83,9 @@ function Notice() {
     @media ${theme.device.mobile}{
       width: 100%; 
       margin-top: 0px;
+      &:not(:nth-child(-n + 2)) {
+        margin-top: 0;
+      }
       &:not(:last-child):after {
         content: "";
         display: block;

@@ -35,6 +35,12 @@ export function FlexList(props: arrDataProps) {
     }
     @media ${theme.device.mobile}{
       display: block;
+      & > div:last-child {
+        padding-left: 0;
+      }
+      &:nth-child(odd) > div:last-child {
+        padding-right: 0;
+      }
     }
   `;
 

@@ -80,7 +80,6 @@ export function Privacy() {
       <SubVisual title="개인정보처리방침" text="" image="../assets/image/image__sub-vis3.png" />
       <BoxTerms className="inner">
         <div className="box__summary">
-          버전 
           <select name="" id="" onChange={onSelect} value={"version " + terms.version}>
             {version.map((item,idx)=>{
               return(
@@ -89,7 +88,7 @@ export function Privacy() {
             })}
           </select>
         </div>
-        <p className="text__title">{terms?.title}<span className="text__version">({terms?.version})</span></p>
+        {terms.title?<p className="text__title">{terms?.title}<span className="text__version">({terms?.version})</span></p>:""}
         <div className="box__text" dangerouslySetInnerHTML={{ __html: terms?.contents }}></div>
       </BoxTerms>
     </>

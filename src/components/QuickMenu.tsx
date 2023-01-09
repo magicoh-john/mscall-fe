@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import iconKakao from "../assets/icon__quick-kakao.png";
 import iconCall from "../assets/icon__quick-call.png";
+import { theme } from "../styles/Theme";
 
 export function QuickMenu() {
   const BoxQuick = styled.div`
@@ -8,6 +9,13 @@ export function QuickMenu() {
     bottom: 50px;
     left: calc(50% + 600px);
     z-index: 10;
+    @media ${theme.device.desktop}{
+      left: auto;
+      right: 30px; 
+    }
+    @media ${theme.device.mobile}{
+      right: 16px; 
+    }
     .button__quick {
       display: block;
       width: 70px;
@@ -17,6 +25,16 @@ export function QuickMenu() {
       border-radius: 50%;
       border: 1px solid #e5e5e5;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      @media ${theme.device.desktop}{
+        width: 60px;
+        height: 60px;
+      }
+      @media ${theme.device.mobile}{
+        width: 45px;
+        height: 45px;
+        margin-top: 5px;
+        background-size: 30px, cover !important;
+      }
       &.button__kakao {
         background: #ffe500 url(${iconKakao}) no-repeat center / 50px;
       }
@@ -64,6 +82,23 @@ export function QuickMenu() {
             border: 2px solid #000;
             transform: rotate(45deg);
             z-index: -1;
+          }
+          @media ${theme.device.mobile}{
+            top: -40px;
+            right: -10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            line-height: 1;
+            border-width: 1px;
+            &:before, &:after{
+              bottom:-2px;
+              right:30px;
+              width:5px;
+              height:5px;
+            }
+            &:after{
+              bottom: -4px;
+            }
           }
         }
       }
