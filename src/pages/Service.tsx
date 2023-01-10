@@ -3,6 +3,7 @@ import { SubVisual } from "../components/Visual";
 import diagramImg from "../assets/image__diagram.png";
 import iconArrow from "../assets/icon__arrow.png";
 import { theme } from "../styles/Theme";
+import { ArrowIconStyle } from "../styles/GlobalStyle";
 
 interface serviceType {
   title: string;
@@ -160,11 +161,7 @@ export default function Service() {
           position: absolute;
           top: calc(50% - 20px);
           right: 50px;
-          display: block;
-          width: 40px;
-          height: 40px;
-          background: #e5e5e5 url(${iconArrow}) no-repeat center;
-          border-radius: 50%;
+          ${ArrowIconStyle}
         }
       }
     }
@@ -192,8 +189,6 @@ export default function Service() {
           position: initial;
           top: 0;
           right: 0;
-          width: 40px;
-          height: 40px;
           margin: 20px auto;
           transform: rotate(90deg);
         }
@@ -216,8 +211,7 @@ export default function Service() {
       <SubVisual
         title="제공서비스"
         text="높은 퀄리티로 고객의 만족도를 높이는 MS COMPANY"
-        image="./assets/image/image__sub-vis4.png"
-      ></SubVisual>
+        image="./assets/image/image__sub-vis4.png" />
       <div className="inner">
         <BoxSection>
           <h3 className="text__title">업무범위</h3>

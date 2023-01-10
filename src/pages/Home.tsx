@@ -179,8 +179,7 @@ function Home() {
         id="mainVis"
         image="./assets/image/image__main-vis.png"
         title="MS, Make Service"
-        text="최상의 서비스, 최고의 파트너"
-      />
+        text="최상의 서비스, 최고의 파트너" />
       <BoxSection className="inner">
         <Title className="scrollMotion">
           <strong>MS COMPANY</strong>는<br/> 이런 업무를 합니다.

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { SubVisual } from "../components/Visual";
 import iconArrow from "../assets/icon__arrow.png";
 import { theme } from "../styles/Theme";
+import { ArrowIconStyle } from "../styles/GlobalStyle";
 
 interface processType {
   src: string;
@@ -32,7 +33,7 @@ const processData: Array<processType> = [
   }
 ];
 
-function Notice() {
+export default function Process() {
   const ProcessList = styled.ul`
     display: flex;
     flex-wrap: wrap;
@@ -44,63 +45,41 @@ function Notice() {
   const ProcessItem = styled.li`
     position: relative;
     width: calc(50% - 60px);
-    @media ${theme.device.desktop}{
-      &:not(:nth-child(-n + 2)) {
-        margin-top: 120px;
-      }
-      &:nth-child(2) .box__image:after {
-        top: auto;
-        bottom: -160px;
-        left: calc(50% - 20px);
-        right: auto;
-        transform: rotate(90deg);
-      }
-      &:nth-child(3) .box__image:after {
-        transform: rotate(180deg);
-      }
-      &:last-child .box__image:after {
-        display: none;
-      }
+    &:not(:nth-child(-n + 2)) {
+      margin-top: 120px;
+    }
+    &:nth-child(2) .box__image:after {
+      top: auto;
+      bottom: -160px;
+      left: calc(50% - 20px);
+      right: auto;
+      transform: rotate(90deg);
+    }
+    &:nth-child(3) .box__image:after {
+      transform: rotate(180deg);
+    }
+    &:last-child .box__image:after {
+      display: none;
     }
     @media ${theme.device.tablet}{
-      &:not(:nth-child(-n + 2)) {
-        margin-top: 120px;
-      }
-      &:nth-child(2) .box__image:after {
-        top: auto;
-        bottom: -160px;
-        left: calc(50% - 20px);
-        right: auto;
-        transform: rotate(90deg);
-      }
-      &:nth-child(3) .box__image:after {
-        transform: rotate(180deg);
-      }
-      &:last-child .box__image:after {
-        display: none;
-      }
+      width: calc(50% - 40px);
     }
     @media ${theme.device.mobile}{
       width: 100%; 
-      margin-top: 0px;
-      &:not(:nth-child(-n + 2)) {
-        margin-top: 0;
-      }
+      max-width: 400px;
+      margin: 0 auto !important;
       &:not(:last-child):after {
         content: "";
-        display: block;
-        width: 40px;
-        height: 40px;
-        margin: 20px auto;
-        background: #bdbdbd url(${iconArrow}) no-repeat center;
-        border-radius: 50%;
-        transform:rotate(90deg);
+        margin:20px auto;
+        ${ArrowIconStyle}
+        transform: rotate(90deg);
       }
     }
     .box__image {
       position: relative;
-      border: 2px solid #e5e5e5;
-      border-radius: 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      box-shadow 2px 2px 5px rgba(0,0,0,0.1);
       text-align: center;
       img {
         width: 80%;
@@ -110,16 +89,17 @@ function Notice() {
         position: absolute;
         top: calc(50% - 20px);
         right: -80px;
-        display: block;
-        width: 40px;
-        height: 40px;
-        background: #bdbdbd url(${iconArrow}) no-repeat center;
-        border-radius: 50%;
+        ${ArrowIconStyle}
+      }
+      @media ${theme.device.tablet}{
+        &:after{
+          right: -60px;
+        }
       }
       @media ${theme.device.mobile}{
         width: 100%; 
         &:after {
-          display:none;
+          display: none;
         }
       }
     }
@@ -161,5 +141,3 @@ function Notice() {
     </>
   );
 }
-
-export default Notice;

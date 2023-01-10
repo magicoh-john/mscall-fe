@@ -1,6 +1,7 @@
 import { createGlobalStyle, css } from "styled-components";
 import reset from "styled-reset";
 import { theme } from "./Theme";
+import iconArrow from "../assets/icon__arrow.png";
 
 export const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -266,5 +267,17 @@ export const FooterStyle = css`
     @media ${theme.device.mobile}{
       font-size: 12px;
     }
+  }
+`;
+
+export const ArrowIconStyle = css`
+  display:block;
+  width: 40px;
+  height: 40px;
+  background: #dbdbdb url(${iconArrow}) no-repeat center / 100%;
+  border-radius: 50%;
+  @media ${theme.device.mobile}{
+    width: 35px;
+    height: 35px;
   }
 `;

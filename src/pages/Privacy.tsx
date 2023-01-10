@@ -77,7 +77,10 @@ export function Privacy() {
   }
   return (
     <>
-      <SubVisual title="개인정보처리방침" text="" image="../assets/image/image__sub-vis3.png" />
+      <SubVisual 
+        title="개인정보처리방침" 
+        text="" 
+        image="../assets/image/image__sub-vis3.png" />
       <BoxTerms className="inner">
         <div className="box__summary">
           <select name="" id="" onChange={onSelect} value={"version " + terms.version}>
