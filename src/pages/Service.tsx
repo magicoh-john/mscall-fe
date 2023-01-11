@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { SubVisual } from "../components/Visual";
 import diagramImg from "../assets/image__diagram.png";
-import iconArrow from "../assets/icon__arrow.png";
 import { theme } from "../styles/Theme";
 import { ArrowIconStyle } from "../styles/GlobalStyle";
 
@@ -10,11 +9,39 @@ interface serviceType {
   text: string;
 }
 
-interface stepType {
+interface iconType {
   icon: string;
   title: string;
   text: string;
 }
+
+const introData: Array<iconType> = [
+  {
+    icon: "../assets/image/icon__service-intro1.png",
+    title: "쇼핑몰 CS대행 외  A/S접수, 예약상담 등 다양한 업무 및 해피콜, 만족도조사 등 전문적인 아웃바운드 업무도 가능합니다.",
+    text: ""
+  },
+  {
+    icon: "../assets/image/icon__service-intro2.png",
+    title: "콜센터 통합시스템으로 녹취, 콜 통계정보 제공이 가능합니다.",
+    text: ""
+  },
+  {
+    icon: "../assets/image/icon__service-intro3.png",
+    title: "놓치는 콜 없이 부재콜 콜백 진행",
+    text: "상담원이 통화 중 으로 인해 미연결된 부재콜들을 통신시스템을 통해 확인 후 콜백 진행하고 있습니다."
+  },
+  {
+    icon: "../assets/image/icon__service-intro4.png",
+    title: "일일, 주간, 월간 업무보고서 발송",
+    text: "구축된 통신시스템을 통한 데이터베이스를 기반으로 업무 종료 후 보고서를 작성하여 메일로 보고드립니다."
+  },
+  {
+    icon: "../assets/image/icon__service-intro5.png",
+    title: "규모에 따른 합리적인 비용 제공",
+    text: "업무 규모에 맞는 적정인력 산출로 고객사 환경에 맞는 견적을 제시해드립니다."
+  }
+];
 
 const serviceData: Array<serviceType> = [
   {
@@ -31,7 +58,7 @@ const serviceData: Array<serviceType> = [
   }
 ];
 
-const stepData: Array<stepType> = [
+const stepData: Array<iconType> = [
   {
     icon: "../assets/image/icon__step1.png",
     title: "스타트업 기초 컨설팅",
@@ -79,6 +106,73 @@ export default function Service() {
         &:before {
           width: 20px;
           margin-bottom: 5px;
+        }
+      }
+    }
+  `;
+  const BoxIntro = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    .list-item{
+      display: flex;
+      width: 50%;
+      padding: 0 20px;
+      align-items: center;
+      &:not(:nth-child(-n+2)){
+        margin-top: 30px;
+      }
+    }
+    .box__icon {
+      width: 120px;
+      height: 120px;
+      margin:0 auto;
+      border-radius: 50%;
+      text-align: center;
+      background: linear-gradient(-45deg, ${theme.colors.pointB} 0% , ${theme.colors.pointG} 100%);
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit : scale-down;
+      }
+    }
+    .box__text {
+      flex: 1;
+      margin-left: 20px;
+      font-size: 16px;
+      word-break: keep-all;
+      .text__title{
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        color:${theme.colors.textMain};
+      }
+    }
+    
+    @media ${theme.device.tablet}{
+      display: block;
+      .list-item{
+        width: 100%;
+        margin-top: 30px;
+      }
+    }
+    @media ${theme.device.mobile}{
+      display: block;
+      .list-item {
+        width: 100%;
+        margin-top: 15px;
+        padding: 0; 
+      }
+      .box__icon {
+        width: 65px;
+        height: 65px;
+        padding: 15px;
+      }
+      .box__text {
+        font-size: 14px;
+        line-height: 1.3;
+        .text__title {
+          margin-bottom: 5px;
+          font-size: 16px;
         }
       }
     }
@@ -213,6 +307,24 @@ export default function Service() {
         text="높은 퀄리티로 고객의 만족도를 높이는 MS COMPANY"
         image="./assets/image/image__sub-vis4.png" />
       <div className="inner">
+        <BoxSection>
+          <h3 className="text__title">MS COMPANY</h3>
+          <BoxIntro>  
+            {introData.map((item, idx)=>{
+              return(
+                <li className="list-item" key={idx}>
+                  <div className="box__icon">
+                    <img src={item.icon} alt="" />
+                  </div>
+                  <div className="box__text">
+                    <p className="text__title">{item.title}</p>
+                    <p>{item.text}</p>
+                  </div>
+                </li>
+              )
+            })}
+          </BoxIntro>
+        </BoxSection>
         <BoxSection>
           <h3 className="text__title">업무범위</h3>
           <BoxDiagram>
