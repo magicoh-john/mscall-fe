@@ -120,8 +120,7 @@ function About() {
       <SubVisual
         title="회사 소개"
         text="MS COMPANY에 방문해주셔서 감사합니다."
-        image="./assets/image/image__sub-vis2.png"
-      />
+        image="./assets/image/image__sub-vis2.png" />
       <div className="inner">
         <BoxSection className="box__info">
           <div className="box__img">
