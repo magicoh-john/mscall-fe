@@ -159,7 +159,7 @@ export default function Service() {
       display: block;
       .list-item {
         width: 100%;
-        margin-top: 15px;
+        margin-top: 15px !important;
         padding: 0; 
       }
       .box__icon {
