@@ -268,6 +268,17 @@ export const FooterStyle = css`
       font-size: 12px;
     }
   }
+  .text__small {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #989898;
+    @media ${theme.device.mobile}{
+      position: relative;
+      margin-top: 5px;
+      font-size: 12px;
+    }
+  }
 `;
 
 export const ArrowIconStyle = css`

@@ -58,6 +58,7 @@ export function QuickMenu() {
           box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
           border-radius: 20px;
           white-space: nowrap;
+          animation: moveTooltip 0.6s ease-in Infinite Alternate;
           &:before {
             content: "";
             position: absolute;
@@ -90,6 +91,7 @@ export function QuickMenu() {
             font-size: 16px;
             line-height: 1;
             border-width: 1px;
+            animation: moveTooltip-m 0.6s ease-in Infinite Alternate;
             &:before, &:after{
               bottom:-2px;
               right:30px;
@@ -99,6 +101,22 @@ export function QuickMenu() {
             &:after{
               bottom: -4px;
             }
+          }
+        }
+        @keyframes moveTooltip {
+          from {
+            top: -80px;
+          }
+          to {
+            top: -70px;
+          }
+        }
+        @keyframes moveTooltip-m {
+          from {
+            top: -50px;
+          }
+          to {
+            top: -40px;
           }
         }
       }
@@ -121,10 +139,10 @@ export function QuickMenu() {
 
   return (
     <BoxQuick>
-      <button type="button" className="button__quick button__call">
+      <a href="tel:1660-3695" className="button__quick button__call">
         <span className="for-a11y">상담<br/>전화</span>
         <div className="box__tooptip">1660-3695</div>
-      </button>
+      </a>
       <button type="button" onClick={openLayer} className="button__quick button__kakao">
         <span className="for-a11y">톡상담</span>
       </button>

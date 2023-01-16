@@ -50,7 +50,7 @@ const serviceData: Array<serviceType> = [
   },
   {
     title: "쇼핑몰 매출 증가",
-    text: "원활한 쇼핑몰 관리와 전문적인 고객 응대로 인한 재 구매율 상승 및 매출증가"
+    text: "원활한 쇼핑몰 관리와 전문적인 고객 응대로 인한 재구매율 상승 및 매출증가"
   },
   {
     title: "쇼핑몰 관리",
@@ -62,7 +62,7 @@ const stepData: Array<iconType> = [
   {
     icon: "../assets/image/icon__step1.png",
     title: "스타트업 기초 컨설팅",
-    text: "스타트 업 회사의 경우 업체와 조율 하에 기초 컨설팅 지원 FAQ 작성, 고객상담 시간조정 업종 별 어드민 추천."
+    text: "스타트업 회사의 경우 업체와 조율 하에 기초 컨설팅 지원 FAQ 작성, 고객상담 시간조정 업종 별 어드민 추천."
   },
   {
     icon: "../assets/image/icon__step2.png",
@@ -194,7 +194,8 @@ export default function Service() {
       position: absolute;
       top: 70px;
       left: 0;
-      width: calc(50% - 220px);
+      width: calc(50% - 250px);
+      word-break: keep-all;
       &:nth-child(2) {
         left: auto;
         right: 0;
@@ -248,6 +249,7 @@ export default function Service() {
     .list-item {
       position: relative;
       flex: 1;
+      word-break: keep-all;
       &:not(:last-child) {
         padding-right: 120px;
         &:after {

@@ -161,6 +161,9 @@ export function MainVisual(props: mainVisType) {
       @media ${theme.device.mobile}{
         font-size: 14px;
       }
+      strong {
+        font-weight: bold;
+      }
     }
     &.active {
       .inner {
