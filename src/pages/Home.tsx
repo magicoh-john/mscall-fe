@@ -179,7 +179,7 @@ function Home() {
         id="mainVis"
         image="./assets/image/image__main-vis.png"
         title="MS, Make Service"
-        text="전문가라는 단어에 걸맞게 고객사의 CS를<br/>체계적이며 효율적으로 관리하여 새로운 성공 지표를 제시하는<br/><strong>최상의 서비스, 최고의 파트너</strong>" />
+        text="전문가라는 단어에 걸맞게 고객사의 CS를<br/>체계적이며 효율적으로 관리하여 성공 지표를 제시하는<br/><strong>최상의 서비스, 최고의 파트너</strong>" />
       <BoxSection className="inner">
         <Title className="scrollMotion">
           <strong>MS COMPANY</strong>는<br/> 이런 업무를 합니다.

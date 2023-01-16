@@ -21,10 +21,13 @@ export function QuickMenu() {
       width: 70px;
       height: 70px;
       margin-top: 10px;
+      color: #000;
       background: #fff;
       border-radius: 50%;
       border: 1px solid #e5e5e5;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      box-sizing: border-box;
       @media ${theme.device.desktop}{
         width: 60px;
         height: 60px;
@@ -33,6 +36,8 @@ export function QuickMenu() {
         width: 45px;
         height: 45px;
         margin-top: 5px;
+        padding: 11px;
+        font-size: 14px;
         background-size: 30px, cover !important;
       }
       &.button__kakao {
@@ -146,9 +151,7 @@ export function QuickMenu() {
       <button type="button" onClick={openLayer} className="button__quick button__kakao">
         <span className="for-a11y">톡상담</span>
       </button>
-      <button type="button" onClick={onClickE} className="button__quick button__top">
-        Top
-      </button>
+      <button type="button" onClick={onClickE} className="button__quick button__top">Top</button>
     </BoxQuick>
   );
 }
