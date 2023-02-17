@@ -260,6 +260,9 @@ export const FooterStyle = css`
         background: #e5e5e5;
         vertical-align: top;
       }
+      strong{
+        font-weight:700;
+      }
     }
   }
   .text__copy {

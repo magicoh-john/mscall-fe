@@ -5,7 +5,7 @@ import { theme } from "../styles/Theme";
 
 const dummyData = {
   title: "MS, <span class='text__blue'>M</span>ake <span class='text__green'>S</span>ervice<br/>최상의 서비스, 최고의 파트너",
-  text: "<p>MS COMPANY는<br/>높은 퀄리티로 고객의 다양한 민원과<br/>기업의 전반적인 CS 업무를 대행하고 있습니다.</p><p>정신적 노동으로 인한 CS 직원의 잦은 퇴사,<br/>부담스러운 신입 채용, 번거로운 교육 등의 문제를<br/>해결해 드립니다.</p><p>많은 경험으로 쌓아온 전문 CS 노하우를 기반하여<br/>좋은 기업 이미지 구축에 힘쓰겠습니다.</p><p>이제 CS는 MS COMPANY의 전문가에게 맡겨 주십시오!</p><p>전문가라는 단어에 걸맞게 고객사의 CS를<br/>체계적이며 효율적으로 관리하여<br/>새로운 성공 지표를 제시하는 최고의 파트너가 되겠습니다.</p>"
+  text: "<p>MS COMPANY는<br/>높은 퀄리티로 고객의 다양한 민원과<br/>기업의 전반적인 CS 업무를 대행하고 있습니다.</p><p>정신적 노동으로 인한 CS 직원의 잦은 퇴사,<br/>부담스러운 신입 채용, 번거로운 교육 등의 문제를<br/>해결해 드립니다.</p><p>많은 경험으로 쌓아온 전문 CS 노하우를 기반하여<br/>좋은 기업 이미지 구축에 힘쓰겠습니다.</p><p>이제 CS는 MS COMPANY의 전문가에게 맡겨 주십시오!</p><p>최상의 서비스로 성공 지표를 제시하는 최고의 파트너<br/>MS COMPANY가 함께 하겠습니다.</p>"
 };
 
 function About() {
