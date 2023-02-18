@@ -102,20 +102,69 @@ function Home() {
     } 
     .box__chart {
       position: relative;
-      width: 800px;
-      max-width:100%;
-      margin: 0 auto;
-      img {
-        width: 100%;
-        transition: all linear 0.4s;
-        transition-delay: 0.8s;
-      }
-      &.active {
-        .image__chart {
-          opacity: 0.5;
+      padding:0 16px;
+      .box__icon{
+        width: 850px;
+        max-width: 100%;
+        margin: 0 auto;
+        img {
+          width: 100%;
+          transition: all linear 0.4s;
+          transition-delay: 0.8s;
         }
       }
     }
+
+    .box__chart-info{
+      display: flex;
+      width: 800px;
+      max-width: 100%;
+      margin: 20px auto 0;
+      justify-content: space-between;
+      .title{
+        margin-bottom: 15px;
+        font-size: 25px;
+        font-weight: 700;
+        color: #222;
+      }
+
+      .list__text{
+        li{
+          padding-left:10px;
+          margin-bottom:5px;
+          font-size:18px;
+          color:#222;
+          text-indent:-10px;
+
+          span{
+            font-size:14px;
+            color:#999
+          }
+        }
+      }
+      
+      @media ${theme.device.mobile} {
+        display: block;
+        .box__text:not(:last-child){
+          margin-bottom: 30px;
+        }
+        .title{
+          margin-bottom: 10px;
+          font-size: 20px;
+        }
+        .list__text{
+          li{
+            font-size:14px;
+            line-height: 1.2;
+            span{
+              font-size:12px;
+            }
+          }
+        }
+      } 
+
+    }
+    
     .list__work-icon {
       display: flex;
       width: 950px;
@@ -179,7 +228,7 @@ function Home() {
         id="mainVis"
         image="./assets/image/image__main-vis.png"
         title="MS, Make Service"
-        text="전문가라는 단어에 걸맞게 고객사의 CS를<br/>체계적이며 효율적으로 관리하여 성공 지표를 제시하는<br/><strong>최상의 서비스, 최고의 파트너</strong>" />
+        text="기업 이미지와 직결되는 CS업무<br/>최상의 서비스로 성공 지표를 제시하는 최고의 파트너<br/><strong>MS COMPANY</strong>가 함께 하겠습니다." />
       <BoxSection className="inner">
         <Title className="scrollMotion">
           <strong>MS COMPANY</strong>는<br/> 이런 업무를 합니다.
@@ -197,16 +246,39 @@ function Home() {
       </BoxSection>
       <BoxSection className="inner">
         <Title className="scrollMotion">
-          <strong>MS COMPANY</strong>와<br/> 함께라면 ?
+        믿고 맡길 수 있는 <strong>MS COMPANY</strong>
         </Title>
         <FlexList data={dummyData} class="scrollMotion"></FlexList>
       </BoxSection>
       <BoxSection>
         <Title className="scrollMotion">
-          <strong>MS COMPANY</strong>가<br/> 비용절감에 도움을 드리겠습니다.
+          <p>CS가 문제라면</p>
+          <p>정답은 <strong>MS COMPANY</strong>입니다.</p>
         </Title>
         <div className="box__chart scrollMotion">
-          <img src={chartImg1} alt="" />
+          <div className="box__icon"><img src={chartImg1} alt="" /></div>
+          <div className="box__chart-info">
+            <div className="box__text">
+              <p className="title">직원 고용 시</p>
+              <ul className="list__text">
+                <li>- 급여 약 220만원</li>
+                <li>- 4대 보험료 약 20만원</li>
+                <li>- 퇴직금 약 20만원</li>
+                <li>- 복리후생비 약 50만원<br/><span>(연차수당 및 식대, 명절 휴가비, 기타 부대비용)</span></li>
+                <li>- 통신비 약 20만원</li>
+              </ul>
+            </div>
+            <div className="box__text">
+              <p className="title">MS COMPANY 대행 시</p>
+              <ul className="list__text">
+                <li>- 대행료 약 200만원</li>
+                <li>- 4대 보험료 0원</li>
+                <li>- 퇴직금 0원</li>
+                <li>- 복리후생비 0원</li>
+                <li>- 통신비 0원</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </BoxSection>
     </>
