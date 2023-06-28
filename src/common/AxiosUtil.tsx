@@ -1,5 +1,13 @@
 import axios from "axios";
 
+/**
+ * send
+ * @param method 
+ * @param url 
+ * @param contentType 
+ * @param data 
+ * @param callback 
+ */
 export function send(method:string, url:string, contentType:string, data:object, callback: (r: any) => void): void {
   axios.defaults.withCredentials = true; 
 
